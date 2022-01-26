@@ -1,10 +1,10 @@
 import React from "react";
 
-const FeedbackItem = () => {
+const FeedbackItem = ({ item }) => {
   return (
     <div className="card">
-      <div className="num-display">10</div>
-      <div className="text-display">This is an feedback</div>
+      <div className="num-display">{item.rating}</div>
+      <div className="text-display">{item.text}</div>
     </div>
   );
 };
