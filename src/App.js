@@ -12,7 +12,7 @@ function App() {
     <>
       <Header />
       <div className="container">
-        <FeedbackForm />
+        <FeedbackForm feedback={feedback} setFeedback={setFeedback} />
         <FeedbackStats feedback={feedback} />
         <FeedbackList feedback={feedback} setFeedback={setFeedback} />
       </div>
