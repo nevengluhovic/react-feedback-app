@@ -10,10 +10,12 @@ const FeebackStats = ({ feedback }) => {
   average = average.toFixed(1);
 
   return (
-    <div className="feedback-stats">
-      <h4>{feedback.length} Reviews</h4>
-      <h4>Average rating: {isNaN(average) ? 0 : average}</h4>
-    </div>
+    feedback.length > 0 && (
+      <div className="feedback-stats ">
+        <h4>{feedback.length} Reviews</h4>
+        <h4>Average rating: {isNaN(average) ? 0 : average}</h4>
+      </div>
+    )
   );
 };
 

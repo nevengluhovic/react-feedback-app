@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Card from "./shared/Card";
 import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
+import { v4 as uuidv4 } from "uuid";
 
 const FeedbackForm = ({ feedback, setFeedback }) => {
   const [text, setText] = useState("");
@@ -23,10 +24,16 @@ const FeedbackForm = ({ feedback, setFeedback }) => {
     setText(e.target.value);
   };
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setFeedback([{ id: uuidv4(), text: text, rating: rating }, ...feedback]);
+    setText("");
+  };
+
   return (
     <Card>
-      <form>
-        <h2>How would you rate your service with you?</h2>
+      <form onSubmit={submitHandler}>
+        <h2>How would you rate your service with us?</h2>
         <RatingSelect select={(rating) => setRating(rating)} />
         <div className="input-group">
           <input
