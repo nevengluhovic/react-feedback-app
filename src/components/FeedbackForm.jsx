@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./shared/Card";
 import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
@@ -9,6 +9,27 @@ const FeedbackForm = ({ feedback, setFeedback }) => {
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [rating, setRating] = useState(10);
   const [message, setMessage] = useState("");
+
+  const saveToLocal = () => {
+    localStorage.setItem("feedback", JSON.stringify(feedback));
+  };
+
+  const getLocalItems = () => {
+    if (localStorage.getItem("feedback") === null) {
+      localStorage.setItem("feedback", JSON.stringify([]));
+    } else {
+      let feedbackLocal = JSON.parse(localStorage.getItem("feedback"));
+      setFeedback(feedbackLocal);
+    }
+  };
+
+  useEffect(() => {
+    getLocalItems();
+  }, []);
+
+  useEffect(() => {
+    saveToLocal();
+  }, [feedback]);
 
   const handleTextChange = (e) => {
     if (text === "") {
