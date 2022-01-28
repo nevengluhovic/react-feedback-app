@@ -1,8 +1,10 @@
+import { useContext } from "react";
+import FeedbackContext from "../context/FeedbackContext";
 import { motion, AnimatePresence } from "framer-motion";
-import React from "react";
 import FeedbackItem from "./FeedbackItem";
 
-const FeedbackList = ({ feedback, setFeedback }) => {
+const FeedbackList = ({ setFeedback }) => {
+  const { feedback } = useContext(FeedbackContext);
   if (!feedback || feedback.length === 0) {
     return <h1>No results</h1>;
   }
