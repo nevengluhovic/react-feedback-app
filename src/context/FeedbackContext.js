@@ -23,6 +23,7 @@ export const FeedbackProvider = ({ children }) => {
     if (window.confirm("Are you sure you want to delete?")) {
       setFeedback(feedback.filter((item) => item.id !== id));
     }
+    feedbackEdit.edit = false;
   };
 
   // Adding item to the feedback list
@@ -33,7 +34,7 @@ export const FeedbackProvider = ({ children }) => {
 
   // Edit feedback
   const [feedbackEdit, setFeedbackEdit] = useState({
-    item: {},
+    item: { rating: 10 },
     edit: false,
   });
 
