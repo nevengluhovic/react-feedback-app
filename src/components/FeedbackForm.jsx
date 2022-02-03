@@ -1,35 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Card from "./shared/Card";
 import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
-import { v4 as uuidv4 } from "uuid";
+import { useContext } from "react";
+import FeedbackContext from "../context/FeedbackContext";
 
 const FeedbackForm = ({ feedback, setFeedback }) => {
+  const { addFeedback, feedbackEdit, updateFeedback } =
+    useContext(FeedbackContext);
+
   const [text, setText] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [rating, setRating] = useState(10);
   const [message, setMessage] = useState("");
 
-  // const saveToLocal = () => {
-  //   localStorage.setItem("feedback", JSON.stringify(feedback));
-  // };
-
-  // const getLocalItems = () => {
-  //   if (localStorage.getItem("feedback") === null) {
-  //     localStorage.setItem("feedback", JSON.stringify([]));
-  //   } else {
-  //     let feedbackLocal = JSON.parse(localStorage.getItem("feedback"));
-  //     setFeedback(feedbackLocal);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getLocalItems();
-  // }, []);
-
-  // useEffect(() => {
-  //   saveToLocal();
-  // }, [feedback]);
+  const inputRef = useRef("");
 
   const handleTextChange = (e) => {
     if (text === "") {
@@ -45,9 +30,25 @@ const FeedbackForm = ({ feedback, setFeedback }) => {
     setText(e.target.value);
   };
 
+  useEffect(() => {
+    if (feedbackEdit.edit === true) {
+      setText(feedbackEdit.item.text);
+      setBtnDisabled(false);
+      setRating(feedbackEdit.item.rating);
+      inputRef.current.focus();
+    }
+  }, [feedbackEdit]);
+
   const submitHandler = (e) => {
     e.preventDefault();
-    setFeedback([{ id: uuidv4(), text: text, rating: rating }, ...feedback]);
+    const newFeedback = { text, rating };
+    if (feedbackEdit.edit === true) {
+      updateFeedback(feedbackEdit.item.id, newFeedback);
+    } else {
+      addFeedback(newFeedback);
+    }
+    feedbackEdit.edit = false;
+
     setText("");
   };
 
@@ -58,6 +59,7 @@ const FeedbackForm = ({ feedback, setFeedback }) => {
         <RatingSelect select={(rating) => setRating(rating)} />
         <div className="input-group">
           <input
+            ref={inputRef}
             type="text"
             onChange={handleTextChange}
             value={text}
@@ -74,3 +76,24 @@ const FeedbackForm = ({ feedback, setFeedback }) => {
 };
 
 export default FeedbackForm;
+
+// const saveToLocal = () => {
+//   localStorage.setItem("feedback", JSON.stringify(feedback));
+// };
+
+// const getLocalItems = () => {
+//   if (localStorage.getItem("feedback") === null) {
+//     localStorage.setItem("feedback", JSON.stringify([]));
+//   } else {
+//     let feedbackLocal = JSON.parse(localStorage.getItem("feedback"));
+//     setFeedback(feedbackLocal);
+//   }
+// };
+
+// useEffect(() => {
+//   getLocalItems();
+// }, []);
+
+// useEffect(() => {
+//   saveToLocal();
+// }, [feedback]);

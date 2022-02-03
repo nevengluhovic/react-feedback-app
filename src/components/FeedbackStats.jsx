@@ -1,6 +1,4 @@
-import React from "react";
-import FeedbackData from "../data/FeedbackData";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import FeedbackContext from "../context/FeedbackContext";
 
 const FeebackStats = () => {
