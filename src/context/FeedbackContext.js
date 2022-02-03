@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const FeedbackContext = createContext();
@@ -6,16 +6,16 @@ const FeedbackContext = createContext();
 export const FeedbackProvider = ({ children }) => {
   // Initial state on refresh
   const [feedback, setFeedback] = useState([
-    {
-      id: 1,
-      text: "This is from a context",
-      rating: 10,
-    },
-    {
-      id: 2,
-      text: "This is from a contextttttttttttttt",
-      rating: 4,
-    },
+    // {
+    //   id: 1,
+    //   text: "This is from a context",
+    //   rating: 10,
+    // },
+    // {
+    //   id: 2,
+    //   text: "This is from a contextttttttttttttt",
+    //   rating: 4,
+    // },
   ]);
 
   // Deleting item from the feedback list
@@ -25,6 +25,28 @@ export const FeedbackProvider = ({ children }) => {
     }
     feedbackEdit.edit = false;
   };
+
+  // Saving to LocalStorage
+  const saveToLocal = () => {
+    localStorage.setItem("feedback", JSON.stringify(feedback));
+  };
+
+  const getLocalItems = () => {
+    if (localStorage.getItem("feedback") === null) {
+      localStorage.setItem("feedback", JSON.stringify([]));
+    } else {
+      let feedbackLocal = JSON.parse(localStorage.getItem("feedback"));
+      setFeedback(feedbackLocal);
+    }
+  };
+
+  useEffect(() => {
+    getLocalItems();
+  }, []);
+
+  useEffect(() => {
+    saveToLocal();
+  }, [feedback]);
 
   // Adding item to the feedback list
   const addFeedback = (newFeedback) => {

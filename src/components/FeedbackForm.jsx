@@ -81,24 +81,3 @@ const FeedbackForm = () => {
 };
 
 export default FeedbackForm;
-
-// const saveToLocal = () => {
-//   localStorage.setItem("feedback", JSON.stringify(feedback));
-// };
-
-// const getLocalItems = () => {
-//   if (localStorage.getItem("feedback") === null) {
-//     localStorage.setItem("feedback", JSON.stringify([]));
-//   } else {
-//     let feedbackLocal = JSON.parse(localStorage.getItem("feedback"));
-//     setFeedback(feedbackLocal);
-//   }
-// };
-
-// useEffect(() => {
-//   getLocalItems();
-// }, []);
-
-// useEffect(() => {
-//   saveToLocal();
-// }, [feedback]);
