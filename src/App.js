@@ -25,7 +25,7 @@ function App() {
               element={
                 <>
                   <FeedbackForm feedback={feedback} setFeedback={setFeedback} />
-                  <FeedbackStats feedback={feedback} />
+                  <FeedbackStats />
                   <FeedbackList setFeedback={setFeedback} />
                 </>
               }

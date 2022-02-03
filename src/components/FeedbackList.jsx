@@ -18,12 +18,7 @@ const FeedbackList = ({ setFeedback }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <FeedbackItem
-              setFeedback={setFeedback}
-              feedback={feedback}
-              key={item.id}
-              item={item}
-            />
+            <FeedbackItem key={item.id} item={item} />
           </motion.div>
         ))}
       </AnimatePresence>

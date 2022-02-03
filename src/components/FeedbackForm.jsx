@@ -10,26 +10,26 @@ const FeedbackForm = ({ feedback, setFeedback }) => {
   const [rating, setRating] = useState(10);
   const [message, setMessage] = useState("");
 
-  const saveToLocal = () => {
-    localStorage.setItem("feedback", JSON.stringify(feedback));
-  };
+  // const saveToLocal = () => {
+  //   localStorage.setItem("feedback", JSON.stringify(feedback));
+  // };
 
-  const getLocalItems = () => {
-    if (localStorage.getItem("feedback") === null) {
-      localStorage.setItem("feedback", JSON.stringify([]));
-    } else {
-      let feedbackLocal = JSON.parse(localStorage.getItem("feedback"));
-      setFeedback(feedbackLocal);
-    }
-  };
+  // const getLocalItems = () => {
+  //   if (localStorage.getItem("feedback") === null) {
+  //     localStorage.setItem("feedback", JSON.stringify([]));
+  //   } else {
+  //     let feedbackLocal = JSON.parse(localStorage.getItem("feedback"));
+  //     setFeedback(feedbackLocal);
+  //   }
+  // };
 
-  useEffect(() => {
-    getLocalItems();
-  }, []);
+  // useEffect(() => {
+  //   getLocalItems();
+  // }, []);
 
-  useEffect(() => {
-    saveToLocal();
-  }, [feedback]);
+  // useEffect(() => {
+  //   saveToLocal();
+  // }, [feedback]);
 
   const handleTextChange = (e) => {
     if (text === "") {
